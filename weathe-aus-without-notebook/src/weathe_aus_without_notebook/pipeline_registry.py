@@ -1,26 +1,23 @@
-"""Project pipelines."""
+"""
+Registro de pipelines.
+"""
+
 from typing import Dict
 
 from kedro.pipeline import Pipeline
-
-from weathe_aus_without_notebook.pipelines import data_analysis
-from weathe_aus_without_notebook.pipelines import data_preparation
-# Solo incluye los pipelines que estás seguro que funcionan
-# from weathe_aus_without_notebook.pipelines import data_visualization
+# Corregir esta línea para usar el nombre real de tu paquete
+from weathe_aus_without_notebook.pipelines.data_to_postgres import pipeline as data_to_postgres
 
 def register_pipelines() -> Dict[str, Pipeline]:
-    """Register the project's pipelines.
-
-    Returns:
-        A mapping from pipeline names to ``Pipeline`` objects.
     """
-    data_analysis_pipeline = data_analysis.create_pipeline()
-    data_preparation_pipeline = data_preparation.create_pipeline()
-    # data_visualization_pipeline = data_visualization.create_pipeline()
+    Registra los pipelines del proyecto.
+    
+    Returns:
+        Un diccionario con los pipelines.
+    """
+    data_to_postgres_pipeline = data_to_postgres.create_pipeline()
 
     return {
-        "__default__": data_analysis_pipeline,
-        "data_analysis": data_analysis_pipeline,
-        "data_preparation": data_preparation_pipeline,
-        "full": data_analysis_pipeline + data_preparation_pipeline,
+        "data_to_postgres": data_to_postgres_pipeline,
+        "__default__": data_to_postgres_pipeline,
     }
