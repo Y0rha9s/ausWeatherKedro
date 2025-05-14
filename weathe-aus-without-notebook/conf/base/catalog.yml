@@ -7,3 +7,20 @@ raw_data:
     encoding: 'utf-8'
     sep: ','
     na_values: ['NA', 'NaN', '', 'null']
+
+# Dataset de entrada desde PostgreSQL - conexión a la tabla directamente
+raw_data_postgres:
+  type: kedro_datasets.pandas.sql_dataset.SQLTableDataset
+  table_name: clean_data
+  credentials:
+    con: postgresql://kedro:kedro@postgres:5432/kedro_db
+
+# Dataset de salida (datos transformados en PostgreSQL)
+transformed_data:
+  type: kedro_datasets.pandas.sql_dataset.SQLTableDataset
+  table_name: transformed_data
+  credentials:
+    con: postgresql://kedro:kedro@postgres:5432/kedro_db
+  save_args:
+    if_exists: 'replace'
+
